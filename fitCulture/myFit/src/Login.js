@@ -8,17 +8,26 @@ import Field from './Field';
 const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [roll, setRoll] = useState('');
 
   const handleLogin = () => {
     console.log('Email:', email);
     console.log('Password:', password);
+    console.log('Roll:', roll);
 
-    props.navigation.navigate('GoalSettingScreen');
+    if(roll === 'Trainer' || roll === 'trainer') {
+      props.navigation.navigate('Profile');
+    }else if(roll === 'user' || roll === 'User'){
+      props.navigation.navigate('HomeUser');
+    }
+     else {
+      alert("Please mention your role");
+    }
   };
 
   return (
     <Background>
-      <View style={{ alignItems: 'center', width: 460, paddingRight: 100 }}>
+      <View style={{ alignItems: 'center', width: 460, paddingRight: 80 }}>
         <Text
           style={{
             color: 'white',
@@ -32,7 +41,7 @@ const Login = (props) => {
           style={{
             backgroundColor: 'white',
             height: 700,
-            width: 360,
+            width: 370,
             borderTopLeftRadius: 130,
             paddingTop: 100,
             alignItems: 'center',
@@ -61,18 +70,24 @@ const Login = (props) => {
             value={password}
             onChangeText={setPassword}
           />
+          <Field
+            placeholder="User / Trainer"
+            value={roll}
+            onChangeText={setRoll}
+          />
           <View
             style={{
               alignItems: 'flex-end',
               width: '78%',
               paddingRight: 16,
-              marginBottom: 200,
+              marginBottom: 10, // Reduce the marginBottom here
             }}>
             <Text
               style={{
                 color: darkGreen,
                 fontWeight: 'bold',
                 fontSize: 16,
+                marginBottom:40
               }}>
               Forgot Password ?
             </Text>
